@@ -1,13 +1,3 @@
-/*
- *
- * CSS written based on SMACSS architecture.
- * To learn more, visit: http://smacss.com/
- * 
- * For simplicity, no reset or normalize is added. 
- * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
- *
-*/
-
 
 /* ---- Base Rules ---- */
 body {
@@ -64,39 +54,71 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
-.navbar__menu ul {
+
+.menu {
+    background-color: aliceblue;
+}
+.menu ul{
     padding-left: 0;
     margin: 0;
-    text-align: right
-    ;position: fixed;
     display: flex;
-    color: #000;
-    justify-content: space-around;
-    width: 100%;
-    background-color: aliceblue;
-    list-style-type: none;
-    
+    justify-content: flex-end;
+    align-items: center;
+
 }
 
-.navbar__menu li {
-    
-}
-
-.navbar__menu .menu__link {
+.menu_link{
     display: block;
     padding: 1em;
+    font-size: large;
     font-weight: bold;
     text-decoration: none;
-    color: #000;
+    color: #001833;
+    background-color: lightblue;
+    border-left: 2px solid green;
 }
 
-.navbar__menu .menu__link:hover {
+.active, .menu_link:hover {
     background: #333;
+    cursor: pointer;
     color: #fff;
     transition: ease 0.3s all;
 }
 
+/* Button to top */
+#topBtn{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: grey;
+    color: aliceblue;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+}
 
+/* Collapsible button */
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+
+  .active, .collapsible:hover {
+    background-color: #ccc;
+  } 
+  
 /* Header Styles */
 .page__header {
     background: #fff;
@@ -202,17 +224,17 @@ section:nth-of-type(3n + 1) .landing__container::after {
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
 /* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
+section.activeSection {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-section.your-active-class .landing__container::before {
+section.activeSection .landing__container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.your-active-class .landing__container::after {
+section.activeSection .landing__container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
@@ -230,3 +252,5 @@ section.your-active-class .landing__container::after {
 		           rotate(-360deg);
 	}
 }
+
+
