@@ -1,95 +1,90 @@
-/**
- * 
- * Manipulating the DOM exercise.
- * Exercise programmatically builds navigation,
- * scrolls to anchors from navigation,
- * and highlights section in viewport upon scrolling.
- * 
- * Dependencies: None
- * 
- * JS Version: ES2015/ES6
- * 
- * JS Standard: ESlint
- * 
-*/
-
-/**
- * Define Global Variables
- * 
-*/
 
 
 const activeNav = document.querySelector('.active-nav');
 
-const navBar = document.querySelector('#navbar');//creation of navbar
+const navBar = document.querySelector('#navbar');//creation of navbar & event listener
+const activeS = document.querySelectorAll('.activeSection');
+navBar.addEventListener('click', scrollNavigation);
+const mybutton = document.getElementById("topBtn");
+const collaps = document.getElementsByClassName('collapsible');
 
-const navFind = document.getElementById('navbar'); //evemt listener
-
-const sections = document.querySelectorAll('section');
-
-sections.forEach(section => {
-
-});
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-function buildNavButton(){
-
+function createNavBar(){
+    const sections = document.querySelectorAll('section');
+    for(section of sections){
+        newNavButton(section);
+    }
+    activeClass();
+}
+function newNavButton(section){
     const docFrag = document.createDocumentFragment();
-
-    let section1 = document.createElement('li');
-    let section2 = document.createElement('li');
-    let section3 = document.createElement('li');
-
-    section1.textContent = 'about';
-    section2.textContent = 'portfolio';
-    section3.textContent = 'contact';
-
-    docFrag.appendChild(section1);
-    docFrag.appendChild(section2);
-    docFrag.appendChild(section3);
+    const button = document.createElement('li');
+    button.textContent = section.dataset.nav;
+    button.classList.add('menu_link');
+    button.setAttribute('data-id', section.id);
+    button.id = `nav-${section.dataset.nav}`;
+    docFrag.appendChild(button);
 
     navBar.appendChild(docFrag);
 
-}
     
-function scrollNav(){
-
-    //if about is clicked. go to about
-
-    //if portfolio is clicked go to portfolio
-
-    //if contact go to contact.
 }
 
-buildNavButton();
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
-// build the nav
+//when clicked the button will take you to the navigated section.
+function scrollNavigation(event){
+    const section = document.querySelector(`#${event.target.dataset.id}`);
+    section.scrollIntoView({behavior: 'smooth'});
+}
 
 
-// Add class 'active' to section when near top of viewport
+//when clicked the navbuttons are highlighted.
+function activeClass(){
+    let header = document.getElementById('navbar');
+    let btns = header.getElementsByClassName('menu_link');
+    for(let i = 0; i <btns.length; i++){
+        btns[i].addEventListener('click', function(){
+            let current = document.getElementsByClassName('active');
+            if(current.length > 0){
+                current[0].className = current[0].className.replace(' active', "");
+            }
+            this.className += ' active';
+        });
+    }
+}
 
+//when the user scrolls down then show button to go to top.
+window.onscroll = function() {scrollFunction()};
 
-// Scroll to anchor ID using scrollTO event
+function scrollFunction(){
+    if(document.body.scrollTop > 20 || document.documentElement.scrollTop > 20){
+        mybutton.style.display = "block";
+    }
+    else{
+        mybutton.style.display = "none";
+    }
+}
 
+//When clicked the user is brough to the top of the document.
+mybutton.addEventListener('click', function(){
+    window.scrollTo({top: 0, behavior: 'smooth'});
+});
 
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
+//when clicked the section will open
+function openSection(){
+    for(let i =0; i < collaps.length; i++){
+        collaps[i].addEventListener('click', function(){
+            this.classList.toggle('active');
+            let content = this.nextElementSibling;
+            if(content.style.display === 'block'){
+                content.style.display = 'none';
+            }
+            else{
+                content.style.display = 'block';
+            }
+        });
+    }
+}
 
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
+//function to create the navbar activated! 
+createNavBar();
+//open and close section function.
+openSection();
