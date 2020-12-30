@@ -1,8 +1,7 @@
 
 /* ---- Base Rules ---- */
 body {
-    background: rgb(136,203,171);
-    background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
+    background: linear-gradient(to right, #1e3c72, #2a5298);
     margin: 0;
     font-family: 'Merriweather', serif;
     color: #fff;
@@ -56,7 +55,7 @@ section {
 /* Navigation Styles*/
 
 .menu {
-    background-color: aliceblue;
+    background: linear-gradient(to right, #ece9e6, #ffffff);
 }
 .menu ul{
     padding-left: 0;
@@ -74,12 +73,12 @@ section {
     font-weight: bold;
     text-decoration: none;
     color: #001833;
-    background-color: lightblue;
-    border-left: 2px solid green;
+    
 }
 
 .active, .menu_link:hover {
-    background: #333;
+    background: linear-gradient(to right, #457fca, #5691c8);
+    border-left: 1px solid black;
     cursor: pointer;
     color: #fff;
     transition: ease 0.3s all;
@@ -94,8 +93,8 @@ section {
     z-index: 99;
     border: none;
     outline: none;
-    background-color: grey;
     color: aliceblue;
+    background-color: transparent;
     cursor: pointer;
     padding: 15px;
     border-radius: 10px;
@@ -104,8 +103,8 @@ section {
 
 /* Collapsible button */
 .collapsible {
-    background-color: #eee;
-    color: #444;
+    background-color: linear-gradient(to right, #457fca, #5691c8);
+    color: black;
     cursor: pointer;
     padding: 18px;
     width: 100%;
@@ -118,23 +117,81 @@ section {
   .active, .collapsible:hover {
     background-color: #ccc;
   } 
-  
+  /* Form styles */
+  .form {
+    display: flex;
+    box-orient: vertical;
+    box-direction: normal;
+    direction: column;
+    flex-direction: column;
+    background: linear-gradient(to right, #457fca, #5691c8);
+    position: relative;
+    padding: 2rem;
+    box-shadow: 5px 10px white
+    
+  }
+
+  @media (min-width: 47.9375em) {
+      .form {
+          padding: 5rem;
+        }
+    }
+    
+    @media (min-width: 61.9375em) {
+        .form {
+            max-width: 50%;
+        }
+    }
+    
+.form_group {
+    display: flex;
+    box-orient: vertical;
+    box-direction: normal;
+    flex-direction: column;
+}
+.form_group:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+.form_label{
+    font-size: 1.5rem;
+    color:#333;
+    margin-bottom:1rem;
+}
+
+.form_input{
+    border: none;
+    font-size: 1.5rem;
+    line-height: 2;
+    padding:0.5rem 1rem;
+}
+.form textarea{
+    resize: none;
+    height: 8rem;
+}
+.form_button {
+    padding: 0.5rem;
+    border: none;
+    font-size: 1.4rem;
+    color: black;
+    
+    border-radius: 10px;
+    cursor: pointer;
+}
 /* Header Styles */
 .page__header {
     background: #fff;
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index: 5;
+     width: 100%;
+     z-index: 5;
 }
-
-/* Footer Styles */
-.page__footer {
-    background: #000;
-    padding: 3em;
-    color: #fff;
-}
-
+    /* Footer Styles */
+    .page__footer {
+        background: linear-gradient(to right, #1e3c72, #2a5298);
+        padding: 3em;
+        color: #fff;
+    }
+    
 .page__footer p{
     color: #fff;
 }
@@ -223,7 +280,6 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
 section.activeSection {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
