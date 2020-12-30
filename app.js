@@ -1,20 +1,21 @@
 
-
-const activeNav = document.querySelector('.active-nav');
-
 const navBar = document.querySelector('#navbar');//creation of navbar & event listener
-const activeS = document.querySelectorAll('.activeSection');
-navBar.addEventListener('click', scrollNavigation);
 const mybutton = document.getElementById("topBtn");
 const collaps = document.getElementsByClassName('collapsible');
+const sections = document.querySelectorAll('section');
 
+//event listener for navagating each section.
+navBar.addEventListener('click', scrollNavigation);
+
+//create the navigation bar function
 function createNavBar(){
-    const sections = document.querySelectorAll('section');
-    for(section of sections){
+    for(const section of sections){
         newNavButton(section);
     }
+    //function for activating and highlighting the section buttons
     activeClass();
 }
+//creating a new navigation button.
 function newNavButton(section){
     const docFrag = document.createDocumentFragment();
     const button = document.createElement('li');
