@@ -3,6 +3,8 @@ const navBar = document.querySelector('#navbar');//creation of navbar & event li
 const mybutton = document.getElementById("topBtn");
 const collaps = document.getElementsByClassName('collapsible');
 const sections = document.querySelectorAll('section');
+let activeSection = document.querySelector('.active-section');
+let activeNav = document.querySelector('.active-nav')
 
 //event listener for navagating each section.
 navBar.addEventListener('click', scrollNavigation);
@@ -43,11 +45,11 @@ function activeClass(){
     let btns = header.getElementsByClassName('menu_link');
     for(let i = 0; i <btns.length; i++){
         btns[i].addEventListener('click', function(){
-            let current = document.getElementsByClassName('active');
+            let current = document.getElementsByClassName('active-nav');
             if(current.length > 0){
-                current[0].className = current[0].className.replace(' active', "");
+                current[0].className = current[0].className.replace(' active-nav', "");
             }
-            this.className += ' active';
+            this.className += ' active-nav';
         });
     }
 }
@@ -85,7 +87,37 @@ function openSection(){
     }
 }
 
+//When scrolling change active class selection for the section when it's in the window view.
 //function to create the navbar activated! 
 createNavBar();
 //open and close section function.
 openSection();
+
+
+
+function onScroll(){
+    const viewportHeight = window.innerHeight;
+    console.log(activeSection);
+    for(const section of sections){
+        const position = section.getBoundingClientRect();
+        console.log(position);
+        if(position.top < viewportHeight && position.bottom > viewportHeight){
+            setActive(sectionID);
+            setActiveNav(document.querySelector(`nav-${section.dataset.nav}`));
+            break;
+        }
+    }
+}
+
+function setActive(sec){
+    activeSection.classList.remove('active-section');
+    sec.classList.add('active-section');
+    activeSection = sec;
+}
+
+function setActiveNav(nav){
+    navBar.classList.remove('active-nav');
+    nav.classList.add('active-nav');
+    navBar= nav;
+}
+onScroll();
