@@ -1,10 +1,10 @@
 
+//Global Vairables
 const navBar = document.querySelector('#navbar');//creation of navbar & event listener
-const mybutton = document.getElementById("topBtn");
-const collaps = document.getElementsByClassName('collapsible');
-const sections = document.querySelectorAll('section');
-let activeSection = document.querySelector('.active-section');
-let activeNav = document.querySelector('.active-nav')
+const mybutton = document.getElementById("topBtn"); //return to top button
+const collaps = document.getElementsByClassName('collapsible'); //collapsible sections element name
+const sections = document.querySelectorAll('section'); //each section of the DOM
+let activeSection = document.querySelector('.active-section'); 
 
 //event listener for navagating each section.
 navBar.addEventListener('click', scrollNavigation);
@@ -16,6 +16,17 @@ function createNavBar(){
     }
     //function for activating and highlighting the section buttons
     activeClass();
+
+    //event listner which will insert moving circles for the section when in viewport.
+    document.addEventListener('scroll', function activeS(){
+        for(const section of sections){
+            if(isInViewport(section)){
+                section.classList.add('activeSection');
+            }else{
+                section.classList.remove('activeSection');
+            }
+        }
+    })
 }
 //creating a new navigation button.
 function newNavButton(section){
@@ -39,7 +50,7 @@ function scrollNavigation(event){
 }
 
 
-//when clicked the navbuttons are highlighted.
+// when clicked the navbuttons are highlighted.
 function activeClass(){
     let header = document.getElementById('navbar');
     let btns = header.getElementsByClassName('menu_link');
@@ -86,38 +97,20 @@ function openSection(){
         });
     }
 }
+function isInViewport(element){
+    const distance = element.getBoundingClientRect();
+    return(
+        distance.top <= 100 && 
+        distance.left >= 0 &&
+        distance.bottom >= 90 &&
+        distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
-//When scrolling change active class selection for the section when it's in the window view.
+//Main function calls.
 //function to create the navbar activated! 
 createNavBar();
+
 //open and close section function.
 openSection();
 
-
-
-function onScroll(){
-    const viewportHeight = window.innerHeight;
-    console.log(activeSection);
-    for(const section of sections){
-        const position = section.getBoundingClientRect();
-        console.log(position);
-        if(position.top < viewportHeight && position.bottom > viewportHeight){
-            setActive(sectionID);
-            setActiveNav(document.querySelector(`nav-${section.dataset.nav}`));
-            break;
-        }
-    }
-}
-
-function setActive(sec){
-    activeSection.classList.remove('active-section');
-    sec.classList.add('active-section');
-    activeSection = sec;
-}
-
-function setActiveNav(nav){
-    navBar.classList.remove('active-nav');
-    nav.classList.add('active-nav');
-    navBar= nav;
-}
-onScroll();
