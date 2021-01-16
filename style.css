@@ -1,5 +1,8 @@
 
 /* ---- Base Rules ---- */
+html{
+    scroll-behavior: smooth;
+}
 body {
     background: linear-gradient(to right, #1e3c72, #2a5298);
     margin: 0;
@@ -46,6 +49,7 @@ main {
 
 section {
     position: relative;
+    display: block;
     min-height: 80vh;
 }
 
@@ -76,7 +80,7 @@ section {
     
 }
 
-.active, .menu_link:hover {
+.active-nav, .menu_link:hover {
     background: linear-gradient(to right, #457fca, #5691c8);
     border-left: 1px solid black;
     cursor: pointer;
@@ -112,11 +116,14 @@ section {
     text-align: left;
     outline: none;
     font-size: 15px;
+    opacity: 1;
   }
 
   .active, .collapsible:hover {
     background-color: #ccc;
+    opacity: .5;
   } 
+
   /* Form styles */
   .form {
     display: flex;
@@ -127,7 +134,7 @@ section {
     background: linear-gradient(to right, #457fca, #5691c8);
     position: relative;
     padding: 2rem;
-    box-shadow: 5px 10px white
+    box-shadow: 5px 10px white;
     
   }
 
@@ -308,5 +315,3 @@ section.activeSection .landing__container::after {
 		           rotate(-360deg);
 	}
 }
-
-
